@@ -1,0 +1,19 @@
+.fretboard {
+  display: flex;
+  flex-direction: column-reverse;
+  overflow: hidden;
+}
+
+.fretboard-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.fret {
+  background-color: rgb(172, 172, 172);
+  border: solid black 1px;
+  padding: 0.2em;
+  width: 2em;
+  height: 1.5em;
+  min-width: 1.1em;
+}

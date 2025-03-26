@@ -1,0 +1,7 @@
+.note {
+  user-select: none; /* Prevent text selection */
+}
+
+.highlighted {
+  background-color: lightgray;
+}
