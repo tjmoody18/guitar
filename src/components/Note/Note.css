@@ -1,7 +1,35 @@
 .note {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   user-select: none; /* Prevent text selection */
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 0.75em;
+  text-align: center;
+  background-color: rgb(198, 198, 198);
+  z-index: 1;
+}
+
+.note p {
+  margin: 0;
+  padding: 0;
+  z-index: 1;
+}
+
+.is-selected {
+  background-color: rgb(246, 246, 246);
 }
 
 .highlighted {
-  background-color: lightgray;
+  background-color:rgb(255, 193, 36);
+  border: solid black 1px;
+}
+
+.root {
+  background-color: darkorange;
+}
+
+.is-selected.highlighted {
+  background-color:rgb(252, 229, 170)
 }

@@ -3,7 +3,7 @@ import "./Fretboard.css"
 import Note from "../Note/Note"
 
 
-const Fretboard = () => {
+const Fretboard = ( { selectedKey, selectedScale }) => {
   
   const numFrets = 21
 
@@ -22,6 +22,22 @@ const Fretboard = () => {
   ]
   const chromaticScale = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
 
+  function getScaleNotes(root, scalePattern) {
+    let scaleNotes = []
+
+    // start at root note
+    let curIndex = chromaticScale.indexOf(root)
+
+    // add root to scale
+    scaleNotes.push(chromaticScale[curIndex])
+
+    for (let step of scalePattern) {
+      // move by scale pattern step, wrap to beginning of chromatic scale
+      curIndex = (curIndex + step) % chromaticScale.length
+      scaleNotes.push(chromaticScale[curIndex]);
+    }
+    return scaleNotes
+  }
 
 
   openStrings.forEach((string, stringIndex) => {
@@ -41,19 +57,30 @@ const Fretboard = () => {
     fretboard.push(stringNotes)
   })
 
+  let scaleNotes = getScaleNotes(selectedKey, selectedScale.pattern)
+
   return (
     <div
       className="fretboard">
-        {fretboard.map((string, index) => (
-          <div key={index} className={`fretboard-row ${string[0].noteName}-string`}>
+        {fretboard.map((string, stringIndex) => (
+          <div key={stringIndex} className={`fretboard-row ${string[0].noteName}-string`}>
             {string.map((fret, index) => (
-              <div className="fret">
+              <>
+              <div 
+                className="string-line" 
+                // set string size based on stringIndex
+                style={{height: `${(fretboard.length - stringIndex) + 1}px`}} 
+              />
+              <div key={index} className="fret">
                 <Note
                   key={index}
                   note={fret.noteName}
                   octave={fret.octave}
+                  isInScale={scaleNotes.includes(fret.noteName)}
+                  isRoot={selectedKey === fret.noteName}
                 />
               </div>
+              </>
             ))}
           </div>
         ))}
