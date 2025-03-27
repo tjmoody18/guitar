@@ -6,6 +6,7 @@ import Note from "../Note/Note"
 const Fretboard = ( { selectedKey, selectedScale }) => {
   
   const numFrets = 21
+  const fretNumsList = [...Array(numFrets + 2).keys()]; // + 2 to account for zero-based indexing and open strings
 
   // array of array of note objects
   // each row represents a string
@@ -62,6 +63,11 @@ const Fretboard = ( { selectedKey, selectedScale }) => {
   return (
     <div
       className="fretboard">
+        <div className="fret-nums">
+          {fretNumsList.map((num) => (
+            <div key={num} className="fret-num">{num}</div>
+          ))}
+        </div>
         {fretboard.map((string, stringIndex) => (
           <div key={stringIndex} className={`fretboard-row ${string[0].noteName}-string`}>
             {string.map((fret, index) => (
