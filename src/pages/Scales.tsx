@@ -9,7 +9,7 @@ function Scales() {
   // console.log(Fretboard)
   // console.log(ScaleSelector)
 
-  const [selectedKey, setSelectedKey] = useState("C");
+  const [selectedKey, setSelectedKey] = useState<string>("C");
   const [selectedScale, setSelectedScale] = useState(scales[0]);
 
   useEffect(() => {

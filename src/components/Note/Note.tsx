@@ -2,34 +2,46 @@ import React, { useState } from "react";
 import './Note.css'
 import Soundfont from "soundfont-player"
 
-let player;
+let player: Soundfont.Player;
 let ac = new AudioContext()
 Soundfont.instrument(ac, 'acoustic_guitar_nylon').then((guitar) => player = guitar);
 
-const playNote = (note) => {
+const playNote = (note: string) => {
   if (player) player.play(note, ac.currentTime, {gain: 5})
 }
 
-const Note = ({ note, octave, isInScale, isRoot}) => {
+interface NoteProps {
+  note: string;
+  octave: number;
+  isInScale: boolean;
+  isRoot: boolean;
+}
+
+const Note: React.FC<NoteProps> = ({ 
+  note, 
+  octave, 
+  isInScale, 
+  isRoot
+}) => {
 
   const [isSelected, setIsSelected] = useState(false)
   // const [isHighlighted, setIsHighlighted] = useState(false)
 
   const handleClick = () => {
-    console.log(`Playing: ${note}${octave}`)
+    // console.log(`Playing: ${note}${octave}`)
     playNote(`${note}${octave}`)
     // Add sound
   };
 
   const handleMouseEnter = () => {
-    console.log("Mouse Enter")
+    // console.log("Mouse Enter")
     setIsSelected(true)
   }
 
-  const handleMouseLeave = (e) => {
+  const handleMouseLeave = (e: React.MouseEvent) => {
     // Don't trigger mouse leave when entering child element
-    if (!e.relatedTarget || !e.currentTarget.contains(e.relatedTarget)) {
-      console.log("Mouse Leave")
+    if (!e.relatedTarget || !e.currentTarget.contains(e.relatedTarget as Node)) {
+      // console.log("Mouse Leave")
       setIsSelected(false)
     }
    
@@ -40,7 +52,7 @@ const Note = ({ note, octave, isInScale, isRoot}) => {
       className={
               `note${isSelected ? " is-selected" : ""}${isInScale ? " highlighted" : ""}${isRoot ? " root" : ""}`
               }
-      onClick={handleClick} 
+      onClick={isInScale ? handleClick : undefined}
       onMouseEnter={handleMouseEnter}
       onMouseOut={handleMouseLeave}
     >

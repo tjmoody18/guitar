@@ -5,13 +5,25 @@ import './ScaleSelector.css'
 import Modal from './Modal'
 import ScaleSelectionContent from "./ScaleSelectionContent";
 
-const ScaleSelector = ( { selectedKey, setSelectedKey, selectedScale, setSelectedScale }) => {
+interface ScaleSelectorProps {
+  selectedKey: string;
+  setSelectedKey:  React.Dispatch<React.SetStateAction<string>>;
+  selectedScale: {name: string, pattern: number[]};
+  setSelectedScale: React.Dispatch<React.SetStateAction<{name: string, pattern: number[]}>>;
+}
+
+const ScaleSelector: React.FC<ScaleSelectorProps> = ({
+  selectedKey,
+  setSelectedKey,
+  selectedScale,
+  setSelectedScale
+}) => {
 
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const chromaticScale = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
 
-  const handleKeyChange = (event) => {
+  const handleKeyChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedKey(event.target.id);
   };
 

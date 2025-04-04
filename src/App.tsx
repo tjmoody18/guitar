@@ -2,7 +2,7 @@ import React from 'react';
 
 import logo from './logo.svg';
 import './App.css';
-import Scales from './pages/Scales';
+import Scales from './pages/Scales'
 
 function App() {
   return (

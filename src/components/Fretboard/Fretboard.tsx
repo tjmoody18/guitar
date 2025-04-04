@@ -2,16 +2,27 @@ import React from "react";
 import "./Fretboard.css"
 import Note from "../Note/Note"
 
+interface FretboardProps {
+  selectedKey: string;
+  selectedScale: {name: string, pattern: number[]};
+}
 
-const Fretboard = ( { selectedKey, selectedScale }) => {
+
+const Fretboard: React.FC<FretboardProps> = ( { 
+  selectedKey, 
+  selectedScale
+ }) => {
   
-  const numFrets = 21
-  const fretNumsList = [...Array(numFrets + 1).keys()];
+  const numFrets: number = 21
+  const fretNumsList: number[] = []
+  for (let i = 0; i <= numFrets; i++) {
+    fretNumsList.push(i)
+  }
 
   // array of array of note objects
   // each row represents a string
   // columns of each row represents a fret
-  let fretboard = []
+  let fretboard: Note[][] = []
 
   const openStrings = [
     { noteName: "E", octave: 4 },
@@ -23,10 +34,10 @@ const Fretboard = ( { selectedKey, selectedScale }) => {
   ]
 
 
-  const chromaticScale = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
+  const chromaticScale: string[] = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
 
-  function getScaleNotes(root, scalePattern) {
-    let scaleNotes = []
+  function getScaleNotes(root: string, scalePattern: number[]): string[] {
+    let scaleNotes: string[] = []
 
     // start at root note
     let curIndex = chromaticScale.indexOf(root)
@@ -42,15 +53,20 @@ const Fretboard = ( { selectedKey, selectedScale }) => {
     return scaleNotes
   }
 
+  interface Note {
+    noteName: string;
+    octave: number;
+  }
+
 
   openStrings.forEach((string, stringIndex) => {
-    let stringNotes = [] // array of note objects
+    let stringNotes: Note[] = [] // array of note objects
     let openNoteIndex = chromaticScale.indexOf(string.noteName)
     for (let fret = 0; fret <= numFrets; fret++) {
       let curNoteName = chromaticScale[(openNoteIndex + fret) % chromaticScale.length]
       let curOctave = string.octave + Math.floor((openNoteIndex + fret) / chromaticScale.length) // integer
       
-      let curNote = {
+      let curNote: Note = {
         noteName: curNoteName,
         octave: curOctave
       }
@@ -79,7 +95,7 @@ const Fretboard = ( { selectedKey, selectedScale }) => {
         
         {/* Fretboard */}
         <div 
-          class="fretboard">
+          className="fretboard">
           {fretboard.map((string, stringIndex) => (
             <div 
               className="fretboard-row" 
