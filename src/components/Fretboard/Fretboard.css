@@ -1,52 +1,47 @@
-.fret-nums {
-  order: 1;
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  /* border:solid red 1px; */
+
+.grid-container {
+  width: 95vw;
+  max-width: 1200px;
 }
 
-.fret-num {
-  margin: 0;
-  padding: 0.2em;
-  width: 2em;
-  height: 1.5em;
-  min-width: 1.1em;
+.fretboard-row {
+  display: grid;
+  position: relative;
+  margin:0;
+  padding:0;
+
+}
+
+.fret-numbers {
+  display: grid;
   text-align: center;
+  margin-bottom: 0.5em;
 }
 
 .fretboard {
   position: relative;
-  width: 100%;
-  display: flex;
-  flex-direction: column-reverse;
-  overflow: hidden;
+  display: grid;
 }
 
-.fretboard-row {
-  position: relative;
+.fret {
   display: flex;
-  flex-direction: row;
+  justify-content: center; 
+  border-right: solid rgb(167, 167, 167) 4px;
+  margin: 0;
+  padding: 5px 0 5px 0;
+  background-color: rgb(18, 18, 18)
+}
+
+.fretboard-row > .fret:nth-child(3) {
+  border-right: solid white 5px;
 }
 
 .string-line {
   position: absolute;
   top: 50%;
-  left: 0;
-  width: 100%;
+  left: 5%;
+  width: 95%;
   background: rgb(0,0,0);
   background: linear-gradient(0deg, rgba(0,0,0,1) 16%, rgba(193,193,193,1) 54%, rgba(87,86,86,1) 84%);
   z-index: 0;
-}
-
-.fret {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgb(172, 172, 172);
-  border: solid black 1px;
-  padding: 0.2em;
-  width: 2em;
-  height: 1.5em;
-  min-width: 1.1em;
 }

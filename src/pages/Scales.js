@@ -20,6 +20,7 @@ function Scales() {
     <div>
       <h1>Guitar Scales</h1>
       <div className="container">
+        {/* <FretboardGPT /> */}
         <Fretboard selectedKey={selectedKey} selectedScale={selectedScale}/>
         <ScaleSelector 
           selectedKey={selectedKey} 
