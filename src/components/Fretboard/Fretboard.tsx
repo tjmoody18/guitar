@@ -37,8 +37,8 @@ const Fretboard: React.FC<FretboardProps> = ( {
       // console.log(note)
       let curNoteName: string = note.substring(0, note.length - 1)
       let curOctave: number = Number(note[note.length - 1])
-      console.log(curNoteName)
-      console.log(curOctave)
+      // console.log(curNoteName)
+      // console.log(curOctave)
       result.push({noteName: curNoteName, octave: curOctave})
     }
     return result.reverse()

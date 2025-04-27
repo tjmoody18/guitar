@@ -28,9 +28,43 @@ function Scales() {
     addTabColumn(tabColumn)
   }
 
+  
+
   function clearTab() {
+    setCurrentColumn(0)
     setTab((prevTab) => [[null, null, null, null, null, null]]);
   }
+
+  useEffect(() => {
+    console.log(currentColumn)
+    console.log(tab[currentColumn])
+  }, [tab, currentColumn])
+  
+
+  useEffect(() => {
+
+    function removeNote() {
+      if (currentColumn === 0) {
+        return;
+      }
+      setTab(tab.filter((_, i) => i !== currentColumn))
+      setCurrentColumn(currentColumn => Math.max(currentColumn - 1, 0))
+    }
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Backspace" || event.key === "Delete") {
+        event.preventDefault()
+        removeNote()
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    // clean up function
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [currentColumn, tab]);
 
   // useEffect(() => {
   //   const cMaj: TabColumn = [
