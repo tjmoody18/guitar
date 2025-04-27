@@ -36,14 +36,9 @@ function Scales() {
     setTab((prevTab) => [[null, null, null, null, null, null]]);
   }
 
-  useEffect(() => {
-    console.log(currentColumn)
-    console.log(tab[currentColumn])
-  }, [tab, currentColumn])
-  
 
+  // remove note on back space
   useEffect(() => {
-
     function removeNote() {
       if (currentColumn === 0) {
         return;
@@ -52,10 +47,21 @@ function Scales() {
       setCurrentColumn(currentColumn => Math.max(currentColumn - 1, 0))
     }
 
+    function addRest() {
+      let emptyColumn = [null, null, null, null, null, null]
+      addTabColumn(emptyColumn)
+    }
+
     function handleKeyDown(event: KeyboardEvent) {
+      console.log(event.key)
       if (event.key === "Backspace" || event.key === "Delete") {
         event.preventDefault()
         removeNote()
+      }
+      if (event.key === " ") {
+        console.log(event.key)
+        event.preventDefault()
+        addRest()
       }
     }
 

@@ -1,0 +1,18 @@
+.tab-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.tab-group {
+  display: flex;
+  flex-direction: column;
+  margin: 1em 1em 1em 1em;
+}
+
+.tab-note {
+  /* display: inline-block; */
+  /* width: 2ch; */
+  /* text-align: center */
+}
