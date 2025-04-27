@@ -1,18 +1,25 @@
 import React from "react";
 import "./Fretboard.css"
 import Note from "../Note/Note"
+import tunings from '../../data/tunings.json'
 
 interface FretboardProps {
   selectedKey: string;
-  selectedScale: {name: string, pattern: number[]};
+  selectedScale: {name: string, pattern: number[]}
+  onNoteClick: (stringVal: number, fret: number) => void;
 }
 
+interface Note {
+  noteName: string;
+  octave: number;
+}
 
 const Fretboard: React.FC<FretboardProps> = ( { 
   selectedKey, 
-  selectedScale
+  selectedScale,
+  onNoteClick
  }) => {
-  
+
   const numFrets: number = 21
   const fretNumsList: number[] = []
   for (let i = 0; i <= numFrets; i++) {
@@ -24,14 +31,30 @@ const Fretboard: React.FC<FretboardProps> = ( {
   // columns of each row represents a fret
   let fretboard: Note[][] = []
 
-  const openStrings = [
-    { noteName: "E", octave: 4 },
-    { noteName: "B", octave: 3 },
-    { noteName: "G", octave: 3 },
-    { noteName: "D", octave: 3 },
-    { noteName: "A", octave: 2 },
-    { noteName: "E", octave: 2 }
-  ]
+  function parseTuning(tuningArray: string[]): Note[] {
+    let result: Note[] = []
+    for (let note of tuningArray) {
+      // console.log(note)
+      let curNoteName: string = note.substring(0, note.length - 1)
+      let curOctave: number = Number(note[note.length - 1])
+      console.log(curNoteName)
+      console.log(curOctave)
+      result.push({noteName: curNoteName, octave: curOctave})
+    }
+    return result.reverse()
+  }
+
+  let tuning: string[] = tunings.guitar.standard
+
+  const openStrings: Note[]  = parseTuning(tuning)
+
+  // Bass
+  // const openStrings: Note[]  = [
+  //   { noteName: "G", octave: 2 },
+  //   { noteName: "D", octave: 2 },
+  //   { noteName: "A", octave: 1 },
+  //   { noteName: "E", octave: 1 }
+  // ]
 
 
   const chromaticScale: string[] = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
@@ -52,12 +75,6 @@ const Fretboard: React.FC<FretboardProps> = ( {
     }
     return scaleNotes
   }
-
-  interface Note {
-    noteName: string;
-    octave: number;
-  }
-
 
   openStrings.forEach((string, stringIndex) => {
     let stringNotes: Note[] = [] // array of note objects
@@ -116,6 +133,7 @@ const Fretboard: React.FC<FretboardProps> = ( {
                     octave={fret.octave}
                     isInScale={scaleNotes.includes(fret.noteName)}
                     isRoot={selectedKey === fret.noteName}
+                    onNoteClick={() => onNoteClick(stringIndex, index)}
                   />
                 </div>
                 </>

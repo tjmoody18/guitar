@@ -1,5 +1,6 @@
 import React from "react";
 import scales from '../data/scales.json'
+import './ScaleSelectionContent.css'
 
 interface ScaleSelectionContentProps {
     selectedScale: {name: string, pattern: number[]};
@@ -22,11 +23,13 @@ const ScaleSelectionContent: React.FC<ScaleSelectionContentProps> = ( {
   return (
     <>
      <h2>Select Scale:</h2>
-     {scales.map((scale, index) => (
-      <button id={index.toString()} key={index} onClick={handleClick}>
-        {scale.name}
-      </button>
-     ))}
+     <div className="flex-container">
+       {scales.map((scale, index) => (
+        <button className="scale-btn" id={index.toString()} key={index} onClick={handleClick}>
+          {scale.name}
+        </button>
+       ))}
+     </div>
     </>
   );
 };

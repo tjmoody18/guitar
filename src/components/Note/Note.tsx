@@ -15,13 +15,15 @@ interface NoteProps {
   octave: number;
   isInScale: boolean;
   isRoot: boolean;
+  onNoteClick: () => void;
 }
 
 const Note: React.FC<NoteProps> = ({ 
   note, 
   octave, 
   isInScale, 
-  isRoot
+  isRoot,
+  onNoteClick
 }) => {
 
   const [isSelected, setIsSelected] = useState(false)
@@ -30,6 +32,7 @@ const Note: React.FC<NoteProps> = ({
   const handleClick = () => {
     // console.log(`Playing: ${note}${octave}`)
     playNote(`${note}${octave}`)
+    onNoteClick()
     // Add sound
   };
 
@@ -52,7 +55,7 @@ const Note: React.FC<NoteProps> = ({
       className={
               `note${isSelected ? " is-selected" : ""}${isInScale ? " highlighted" : ""}${isRoot ? " root" : ""}`
               }
-      onClick={isInScale ? handleClick : undefined}
+      onClick={handleClick}
       onMouseEnter={handleMouseEnter}
       onMouseOut={handleMouseLeave}
     >

@@ -3,7 +3,11 @@
   flex-direction: row;
 }
 
-.select-key-header button {
+.select-key-header h2 {
+  width: 7em;
+}
+
+.select-key-header > button {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -32,6 +36,7 @@
   width: 80vw;
   align-items: stretch;
   max-width: 900px;
+  color: black;
 }
 
 .note-selector-container input[type="radio"] {
