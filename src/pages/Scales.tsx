@@ -20,6 +20,8 @@ function Scales() {
   const [tab, setTab] = useState<Tablature>([[null, null, null, null, null, null]]);
   const [currentColumn, setCurrentColumn] = useState(0);
 
+  const [tempo, setTempo] = useState(60);
+
   function addTabColumn(tabColumn: TabColumn) {
     setTab((prevTab) => [...prevTab, tabColumn]);
     setCurrentColumn(currentColumn => currentColumn + 1)
@@ -100,7 +102,7 @@ function Scales() {
   // ]
 
   function handleClick(e: any) {
-    TabPlayer.play(tab)
+    TabPlayer.play(tab, tempo)
   }
 
   return (
@@ -117,7 +119,13 @@ function Scales() {
           selectedScale={selectedScale}
           setSelectedScale={setSelectedScale}
         />
-        <TabEditor tab={transposeTab(tab)} currentColumn={currentColumn} clearTab={clearTab}/>
+        <TabEditor 
+          tab={transposeTab(tab)} 
+          currentColumn={currentColumn} 
+          clearTab={clearTab}
+          tempo={tempo}
+          setTempo={setTempo}
+          />
         <button onClick={(e) => handleClick(e)}>Play</button>
       </div>
     </div>

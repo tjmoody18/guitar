@@ -3,8 +3,10 @@ import { NoteEvent } from '../logic/SoundManger'
 import { TabColumn, TabNote, Tablature } from './tabHelpers'
 
 
-export function play(tab: Tablature) {
+export function play(tab: Tablature, tempoInBpm: number) {
   // create an array of note names from tablature
+
+  const noteDuration = 60 / tempoInBpm
   let noteEvents: NoteEvent[] = []
   let time = 0
   tab.forEach(tabColumn => {
@@ -16,7 +18,7 @@ export function play(tab: Tablature) {
         })
       }
     })
-    time += 0.2
+    time += noteDuration
   });
   SoundManager.playNotes(noteEvents)
 }

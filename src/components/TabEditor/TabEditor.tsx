@@ -1,6 +1,7 @@
 import { TabColumn, Tablature } from '../../logic/tabHelpers';
 import ClearButton from '../ClearButton';
 import { useWindowDimension } from '../hooks/useWindowDimension';
+import TempoSlider from '../TempoSlider';
 
 import './TabEditor.css'
 
@@ -8,13 +9,17 @@ interface TabEditorProps {
   tab: Tablature;
   currentColumn: number;
   clearTab: () => void;
+  tempo: number;
+  setTempo: React.Dispatch<React.SetStateAction<number>>;
 }
 
 
 const TabEditor: React.FC<TabEditorProps> = ( {
   tab,
   currentColumn,
-  clearTab
+  clearTab,
+  tempo,
+  setTempo
 }) => {
 
   const [width, height] = useWindowDimension();
@@ -41,6 +46,7 @@ const TabEditor: React.FC<TabEditorProps> = ( {
   return (
     <>
     <ClearButton clearTab={clearTab} />
+    <TempoSlider tempo={tempo} setTempo={setTempo}/>
     <div className='tab-container' style={{ fontFamily: "monospace", fontSize: "18px" }}>
      {tabGroups.map((tabGroup, idx) => (
       <div className='tab-group'>
