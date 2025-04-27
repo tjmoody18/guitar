@@ -1,10 +1,13 @@
-import  React, { useState, useEffect } from "react";
+import  React, { useState, useEffect, MouseEventHandler } from "react";
 import Fretboard from "../components/Fretboard/Fretboard";
 import ScaleSelector from "../components/ScaleSelector";
 import TabEditor from "../components/TabEditor/TabEditor";
 import { TabNote, TabColumn, Tablature, transposeTab, initializeEmptyColumn } from "../logic/tabHelpers";
 import './Scales.css';
 import scales from '../data/scales.json';
+
+// TEST
+import * as TabPlayer from '../logic/TabPlayer'
 
 function Scales() {
 
@@ -22,13 +25,11 @@ function Scales() {
     setCurrentColumn(currentColumn => currentColumn + 1)
   }
 
-  function addNote(stringVal: number, fret: number) {
+  function addNote(stringVal: number, fret: number, noteName: string) {
     let tabColumn: TabColumn = [null, null, null, null, null, null]
-    tabColumn[stringVal] = {stringVal: stringVal, fret: fret}
+    tabColumn[stringVal] = {stringVal: stringVal, fret: fret, noteName: noteName}
     addTabColumn(tabColumn)
   }
-
-  
 
   function clearTab() {
     setCurrentColumn(0)
@@ -83,21 +84,22 @@ function Scales() {
     console.log(`Key: ${selectedKey}`)
   }, [selectedKey]);
 
-  let myTab: Tablature = [
-  [{ stringVal: 0, fret: 10, noteName: "E3" }, { stringVal: 1, fret: 1, noteName: "C4" }, null, null, null, { stringVal: 0, fret: 0, noteName: "E4" }], // E
-  [{ stringVal: 3, fret: 10, noteName: "E3" }, { stringVal: 1, fret: 1, noteName: "C4" }, null, null, { stringVal: 1, fret: 1, noteName: "C4" }, null], // C
-  [{ stringVal: 3, fret: 10, noteName: "E3" }, { stringVal: 1, fret: 1, noteName: "C4" }, null, { stringVal: 2, fret: 0, noteName: "G3" }, null, null], // G
-  [{ stringVal: 3, fret: 10, noteName: "E3" }, { stringVal: 3, fret: 10, noteName: "E3" }, { stringVal: 3, fret: 2, noteName: "E3" }, null, null, null], // E
-  [{ stringVal: 3, fret: 10, noteName: "E3" }, { stringVal: 1, fret: 1, noteName: "C4" }, { stringVal: 3, fret: 2, noteName: "E3" }, null, null, null],
-  [{ stringVal: 3, fret: 10, noteName: "E3" }, { stringVal: 3, fret: 10, noteName: "E3" }, { stringVal: 3, fret: 2, noteName: "E3" }, { stringVal: 3, fret: 10, noteName: "E3" }, null, { stringVal: 3, fret: 10, noteName: "E3" }]
-  ]
+  // let myTab: Tablature = [
+  // [{ stringVal: 0, fret: 10, noteName: "E3" }, { stringVal: 1, fret: 1, noteName: "C4" }, null, null, null, { stringVal: 0, fret: 0, noteName: "E4" }], // E
+  // [{ stringVal: 3, fret: 10, noteName: "E3" }, { stringVal: 1, fret: 1, noteName: "C4" }, null, null, { stringVal: 1, fret: 1, noteName: "C4" }, null], // C
+  // [{ stringVal: 3, fret: 10, noteName: "E3" }, { stringVal: 1, fret: 1, noteName: "C4" }, null, { stringVal: 2, fret: 0, noteName: "G3" }, null, null], // G
+  // [{ stringVal: 3, fret: 10, noteName: "E3" }, { stringVal: 3, fret: 10, noteName: "E3" }, { stringVal: 3, fret: 2, noteName: "E3" }, null, null, null], // E
+  // [{ stringVal: 3, fret: 10, noteName: "E3" }, { stringVal: 1, fret: 1, noteName: "C4" }, { stringVal: 3, fret: 2, noteName: "E3" }, null, null, null],
+  // [{ stringVal: 3, fret: 10, noteName: "E3" }, { stringVal: 3, fret: 10, noteName: "E3" }, { stringVal: 3, fret: 2, noteName: "E3" }, { stringVal: 3, fret: 10, noteName: "E3" }, null, { stringVal: 3, fret: 10, noteName: "E3" }]
+  // ]
 
-  // setTab(myTab)
+  function handleClick(e: any) {
+    TabPlayer.play(tab)
+  }
 
   return (
     <div>
       <div className="container">
-        {/* <FretboardGPT /> */}
         <Fretboard 
           selectedKey={selectedKey} 
           selectedScale={selectedScale}
@@ -110,7 +112,7 @@ function Scales() {
           setSelectedScale={setSelectedScale}
         />
         <TabEditor tab={transposeTab(tab)} currentColumn={currentColumn} clearTab={clearTab}/>
-
+        <button onClick={(e) => handleClick(e)}>Play</button>
       </div>
     </div>
   );

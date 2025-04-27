@@ -1,7 +1,7 @@
 export type TabNote = {
   stringVal: number;
   fret: number;
-  noteName?: string;
+  noteName: string;
   midi?: number;
 };
 

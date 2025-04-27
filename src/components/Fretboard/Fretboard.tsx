@@ -6,7 +6,7 @@ import tunings from '../../data/tunings.json'
 interface FretboardProps {
   selectedKey: string;
   selectedScale: {name: string, pattern: number[]}
-  onNoteClick: (stringVal: number, fret: number) => void;
+  onNoteClick: (stringVal: number, fret: number, noteName: string) => void;
 }
 
 interface Note {
@@ -133,7 +133,7 @@ const Fretboard: React.FC<FretboardProps> = ( {
                     octave={fret.octave}
                     isInScale={scaleNotes.includes(fret.noteName)}
                     isRoot={selectedKey === fret.noteName}
-                    onNoteClick={() => onNoteClick(stringIndex, index)}
+                    onNoteClick={() => onNoteClick(stringIndex, index, `${fret.noteName}${fret.octave}`)}
                   />
                 </div>
                 </>
