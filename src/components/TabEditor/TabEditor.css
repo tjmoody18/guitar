@@ -1,8 +1,14 @@
 .tab-container {
   display: flex;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   align-items: flex-start;
   flex-direction: column;
+  max-height: 800px;
+  overflow-y: scroll;
+  border: solid gray 1px;
+  align-self: flex-start;
+  margin-left: 1em;
+  margin-bottom: 1em;
 }
 
 .tab-group {

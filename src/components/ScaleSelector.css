@@ -32,7 +32,7 @@
 
 .note-selector-container {
   display: flex;
-  margin: 1rem;
+  margin: 0.5em;
   width: 80vw;
   align-items: stretch;
   max-width: 900px;

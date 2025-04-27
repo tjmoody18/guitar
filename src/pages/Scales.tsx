@@ -119,6 +119,7 @@ function Scales() {
           selectedScale={selectedScale}
           setSelectedScale={setSelectedScale}
         />
+        <button onClick={(e) => handleClick(e)}>Play</button>
         <TabEditor 
           tab={transposeTab(tab)} 
           currentColumn={currentColumn} 
@@ -126,7 +127,7 @@ function Scales() {
           tempo={tempo}
           setTempo={setTempo}
           />
-        <button onClick={(e) => handleClick(e)}>Play</button>
+        
       </div>
     </div>
   );

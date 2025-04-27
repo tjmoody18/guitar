@@ -2,6 +2,7 @@
 .grid-container {
   width: 95vw;
   max-width: 1200px;
+  margin-top: 2em;
 }
 
 .fretboard-row {

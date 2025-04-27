@@ -23,7 +23,7 @@ const TabEditor: React.FC<TabEditorProps> = ( {
 }) => {
 
   const [width, height] = useWindowDimension();
-  const chunkSize = Math.round(width / 50)
+  const chunkSize = Math.round(width / 41)
   console.log(`chunkSize: ${chunkSize}`)
 
   function chunkTab(tab: Tablature, chunkSize: number): Tablature[] {
