@@ -14,7 +14,7 @@ function Scales() {
   const [selectedKey, setSelectedKey] = useState<string>("C");
   const [selectedScale, setSelectedScale] = useState(scales[0]);
 
-  const [tab, setTab] = useState<Tablature>([]);
+  const [tab, setTab] = useState<Tablature>([[null, null, null, null, null, null]]);
   const [currentColumn, setCurrentColumn] = useState(0);
 
   function addTabColumn(tabColumn: TabColumn) {
@@ -26,6 +26,10 @@ function Scales() {
     let tabColumn: TabColumn = [null, null, null, null, null, null]
     tabColumn[stringVal] = {stringVal: stringVal, fret: fret}
     addTabColumn(tabColumn)
+  }
+
+  function clearTab() {
+    setTab((prevTab) => [[null, null, null, null, null, null]]);
   }
 
   // useEffect(() => {
@@ -71,7 +75,7 @@ function Scales() {
           selectedScale={selectedScale}
           setSelectedScale={setSelectedScale}
         />
-        <TabEditor tab={transposeTab(tab)} currentColumn={currentColumn}/>
+        <TabEditor tab={transposeTab(tab)} currentColumn={currentColumn} clearTab={clearTab}/>
 
       </div>
     </div>
