@@ -37,6 +37,7 @@ function Scales() {
   function clearTab() {
     setCurrentColumn(0)
     setTab((prevTab) => [[null, null, null, null, null, null]]);
+    TabPlayer.stop()
   }
 
 
@@ -103,7 +104,9 @@ function Scales() {
   // ]
 
   function handlePlay(e: any) {
-    TabPlayer.play(tab, tempo)
+    // start at index 1 to skip the initial rest (empty tab column) at index
+    // 0 from tab initialization
+    TabPlayer.play(tab.slice(1), tempo)
   }
 
   function handleStop(e: any) {
