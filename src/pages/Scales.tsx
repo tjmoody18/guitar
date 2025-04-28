@@ -2,6 +2,7 @@ import  React, { useState, useEffect, MouseEventHandler } from "react";
 import Fretboard from "../components/Fretboard/Fretboard";
 import ScaleSelector from "../components/ScaleSelector";
 import TabEditor from "../components/TabEditor/TabEditor";
+import ClearButton from "../components/ClearButton";
 import { TabNote, TabColumn, Tablature, transposeTab, initializeEmptyColumn } from "../logic/tabHelpers";
 import './Scales.css';
 import scales from '../data/scales.json';
@@ -101,8 +102,12 @@ function Scales() {
   // [{ stringVal: 3, fret: 10, noteName: "E3" }, { stringVal: 3, fret: 10, noteName: "E3" }, { stringVal: 3, fret: 2, noteName: "E3" }, { stringVal: 3, fret: 10, noteName: "E3" }, null, { stringVal: 3, fret: 10, noteName: "E3" }]
   // ]
 
-  function handleClick(e: any) {
+  function handlePlay(e: any) {
     TabPlayer.play(tab, tempo)
+  }
+
+  function handleStop(e: any) {
+    TabPlayer.stop()
   }
 
   return (
@@ -119,11 +124,15 @@ function Scales() {
           selectedScale={selectedScale}
           setSelectedScale={setSelectedScale}
         />
-        <button onClick={(e) => handleClick(e)}>Play</button>
+
+        <div className="tab-buttons">
+          <button onClick={(e) => handlePlay(e)}>Play</button>
+          <button onClick={(e) => handleStop(e)}>Stop</button>
+          <ClearButton clearTab={clearTab} />
+        </div>
         <TabEditor 
           tab={transposeTab(tab)} 
           currentColumn={currentColumn} 
-          clearTab={clearTab}
           tempo={tempo}
           setTempo={setTempo}
           />

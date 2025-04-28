@@ -8,7 +8,6 @@ import './TabEditor.css'
 interface TabEditorProps {
   tab: Tablature;
   currentColumn: number;
-  clearTab: () => void;
   tempo: number;
   setTempo: React.Dispatch<React.SetStateAction<number>>;
 }
@@ -17,7 +16,6 @@ interface TabEditorProps {
 const TabEditor: React.FC<TabEditorProps> = ( {
   tab,
   currentColumn,
-  clearTab,
   tempo,
   setTempo
 }) => {
@@ -45,7 +43,7 @@ const TabEditor: React.FC<TabEditorProps> = ( {
 
   return (
     <>
-    <ClearButton clearTab={clearTab} />
+    
     <TempoSlider tempo={tempo} setTempo={setTempo}/>
     <div className='tab-container' style={{ fontFamily: "monospace", fontSize: "18px" }}>
      {tabGroups.map((tabGroup, idx) => (

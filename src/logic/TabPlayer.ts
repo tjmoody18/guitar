@@ -24,7 +24,7 @@ export function play(tab: Tablature, tempoInBpm: number) {
 }
 
 export function stop() {
-  return
+  SoundManager.stop()
 }
 
 export function pause() {
@@ -32,10 +32,6 @@ export function pause() {
 }
 
 export function resume() {
-  return
-}
-
-export function setTempo() {
   return
 }
 

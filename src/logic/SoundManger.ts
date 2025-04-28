@@ -15,16 +15,15 @@ export const playNote = (note: string) => {
 
 export const playNotes = (noteEvents: NoteEvent[]) => {
   if (player) {
-    // let time = 0
-    // let events: {note: string, time: number}[] = []
-    // notes.forEach((note) => {
-    //   events.push({
-    //     note: note,
-    //     time: time
-    //   });
-    //   time += 0.5
-    // })
+    // stop any currently playing notes
+    player.stop()
     player.schedule(ac.currentTime, noteEvents)
+  }
+}
+
+export const stop = () => {
+  if (player) {
+    player.stop()
   }
 }
 
